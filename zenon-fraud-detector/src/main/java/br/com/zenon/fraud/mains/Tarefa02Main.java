@@ -1,10 +1,13 @@
-package br.com.zenon.fraud;
+package br.com.zenon.fraud.mains;
+
+import br.com.zenon.fraud.Customer;
+import br.com.zenon.fraud.Transaction;
 
 import java.math.BigDecimal;
 
 import static br.com.zenon.fraud.Transaction.Type.*;
 
-public class Main {
+public class Tarefa02Main {
 
     static void main() {
 
