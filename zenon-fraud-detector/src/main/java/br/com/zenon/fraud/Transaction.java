@@ -2,21 +2,19 @@ package br.com.zenon.fraud;
 
 import java.math.BigDecimal;
 
-public record Transaction(Long step, Type type, BigDecimal amount, Customer origin,
-                          Customer destination, Boolean isFraud, Boolean isFlaggedFraud ) {
-
-    public enum Type {
-        CASH_IN, CASH_OUT, DEBIT, PAYMENT, TRANSFER;
-    }
+public record Transaction(int step, TransactionType type, BigDecimal amount, TransactionCustomer origin,
+                          TransactionCustomer recipient, Boolean isFraud, Boolean isFlaggedFraud ) {
 
     public Transaction {
-        if (step < 0)
-            throw new IllegalArgumentException("step não pode ser negativo");
+        if (step < 1)
+            throw new IllegalArgumentException("step should be positive: " + step);
         if (type == null)
-            throw new IllegalArgumentException("type não pode ser nulo");
-        if (amount == null || amount.signum() < 0)
-            throw new IllegalArgumentException("amount inválido");
-        if (origin == null || destination == null)
-            throw new IllegalArgumentException("clientes de origem/destino obrigatórios");
+            throw new IllegalArgumentException("type should not be null");
+        if (amount == null)
+            throw new IllegalArgumentException("amount should not be null");
+        if (amount.signum() < 0)
+            throw new IllegalArgumentException("amount should be positive: " + amount);
+        if (origin == null || recipient == null)
+            throw new IllegalArgumentException("origin/recipient should not be null");
     }
 }
