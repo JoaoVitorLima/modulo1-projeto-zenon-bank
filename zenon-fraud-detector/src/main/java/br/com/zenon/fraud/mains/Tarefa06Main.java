@@ -39,6 +39,5 @@ public class Tarefa06Main {
         transactionMapRepository.findByOriginName("C1868032458");
         long fimMap = System.nanoTime();
         IO.println("  MAP tempo (1x): " + (fimMap - iniMap) + " ns");
-
     }
 }
