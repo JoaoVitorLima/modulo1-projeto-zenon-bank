@@ -7,9 +7,9 @@ import java.nio.file.Path;
 
 public class TransactionReport {
 
-    private long totalLinhas;
-    private long totalFraudes;
-    private BigDecimal valorTotalTransacionado  = BigDecimal.ZERO;
+    private long totalLines;
+    private long totalFrauds;
+    private BigDecimal totalAmountTransacted  = BigDecimal.ZERO;
 
     public void process(String nomeArquivo) throws IOException {
         try (var lines = Files.lines(Path.of(nomeArquivo))) {
@@ -19,29 +19,29 @@ public class TransactionReport {
     }
 
     private void processLine(String linha) {
-        totalLinhas++;
+        totalLines++;
 
         String[] p = linha.split(",", -1);
         try {
             BigDecimal amount = new BigDecimal(p[2]);
-            valorTotalTransacionado = valorTotalTransacionado.add(amount);
+            totalAmountTransacted = totalAmountTransacted.add(amount);
 
             if ("1".equals(p[9])) {
-                totalFraudes++;
+                totalFrauds++;
             }
         } catch (RuntimeException e) {
         }
     }
 
-    public long getTotalLinhas() {
-        return totalLinhas;
+    public long getTotalLines() {
+        return totalLines;
     }
 
-    public long getTotalFraudes() {
-        return totalFraudes;
+    public long getTotalFrauds() {
+        return totalFrauds;
     }
 
-    public BigDecimal getValorTotalTransacionado() {
-        return valorTotalTransacionado;
+    public BigDecimal getTotalAmountTransacted() {
+        return totalAmountTransacted;
     }
 }
