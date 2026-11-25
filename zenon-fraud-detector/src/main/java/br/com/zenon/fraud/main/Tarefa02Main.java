@@ -1,4 +1,4 @@
-package br.com.zenon.fraud.mains;
+package br.com.zenon.fraud.main;
 
 import br.com.zenon.fraud.TransactionCustomer;
 import br.com.zenon.fraud.Transaction;

@@ -1,14 +1,10 @@
-package br.com.zenon.fraud.mains;
+package br.com.zenon.fraud.main;
 
 import br.com.zenon.fraud.FraudAnalyzer;
-import br.com.zenon.fraud.Transaction;
 import br.com.zenon.fraud.TransactionIngestor;
-import br.com.zenon.fraud.TransactionType;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
 
 public class Tarefa05Main {
 

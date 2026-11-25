@@ -1,4 +1,6 @@
-package br.com.zenon.fraud;
+package br.com.zenon.fraud.repository;
+
+import br.com.zenon.fraud.Transaction;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +19,11 @@ public class TransactionListRepository implements TransactionRepository {
         return transactions.stream()
                 .filter(t -> t.origin().name().equals(name))
                 .findFirst();
+    }
+
+    @Override
+    public void save(Transaction transaction) {
+        throw new UnsupportedOperationException("ListRepository não persiste");
     }
 
 }
