@@ -12,7 +12,7 @@ public class ConnectionFactory {
 
         try {
             return DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3308/zenon_fraud",
+                    "jdbc:mysql://localhost:3309/zenon_fraud",
                     "root",
                     "pass123");
         } catch (SQLException e) {

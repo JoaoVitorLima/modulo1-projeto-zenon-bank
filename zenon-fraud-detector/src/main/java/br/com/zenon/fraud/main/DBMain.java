@@ -17,14 +17,23 @@ public class DBMain {
         IO.println("Conexão com o DB criada!");
 
         TransactionIngestor ingestor = new TransactionIngestor(ARQUIVO);
-        TransactionSQLRepository repository = new TransactionSQLRepository();
 
+        long iniList = System.nanoTime();
+
+        TransactionSQLRepository repository = new TransactionSQLRepository();
         List<Transaction> transacoes = ingestor.getLista();
 
+        IO.println("Iniciado a inserção no BD...");
         for (Transaction t : transacoes) {
             repository.save(t);
         }
+        IO.println("Finalizado a inserção no BD!");
+        long fimList = System.nanoTime();
+        IO.println("  Tempo de inserção - SQL (1x): " + (fimList - iniList) + " ns");
+
+
 
         repository.findByOriginName("C1231006815");
+        repository.findByOriginName("C12345");
     }
 }

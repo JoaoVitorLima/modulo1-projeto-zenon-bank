@@ -6,7 +6,7 @@ services:
       MYSQL_ROOT_PASSWORD: pass123
       MYSQL_DATABASE: zenon_fraud
     ports:
-      - '3308:3306'
+      - '3309:3306'
     volumes:
       - mysql.zenon.fraud:/var/lib/mysql
       - ./script.sql:/docker-entrypoint-initdb.d/01-script.sql:ro
