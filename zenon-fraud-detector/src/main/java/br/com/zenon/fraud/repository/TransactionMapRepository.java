@@ -25,7 +25,7 @@ public class TransactionMapRepository implements TransactionRepository {
 
     @Override
     public void save(Transaction transaction) {
-        throw new UnsupportedOperationException("MapRepository não persiste");
+        this.transactionsMap.putIfAbsent(transaction.origin().name(), transaction);
     }
 
 }

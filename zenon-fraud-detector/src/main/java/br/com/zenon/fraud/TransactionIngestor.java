@@ -14,7 +14,7 @@ public class TransactionIngestor {
     public TransactionIngestor(String nomeArquivo) throws IOException {
 
         try (var lines = Files.lines(Path.of(nomeArquivo))) {
-            lines.skip(1).limit(100000).forEach(linha -> {
+            lines.skip(1).limit(10_000).forEach(linha -> {
                 try {
                     String[] p = linha.split(",", -1);
                     int step = Integer.parseInt(p[0]);

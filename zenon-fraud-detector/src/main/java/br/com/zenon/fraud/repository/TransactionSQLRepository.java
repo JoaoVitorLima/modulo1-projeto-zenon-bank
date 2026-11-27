@@ -47,7 +47,30 @@ public class TransactionSQLRepository implements TransactionRepository {
 
     @Override
     public void save(Transaction transaction) {
+        String sql = """
+            INSERT INTO TRANSACTIONS
+            (step, type, amount, name_orig, old_balance_org, new_balance_orig,
+            name_dest, old_balance_dest, new_balance_dest, is_fraud, is_flagged_fraud)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """;
 
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, transaction.step());
+            ps.setString(2, transaction.type().name());
+            ps.setBigDecimal(3, transaction.amount());
+            ps.setString(4, transaction.origin().name());
+            ps.setBigDecimal(5, transaction.origin().oldBalance());
+            ps.setBigDecimal(6, transaction.origin().newBalance());
+            ps.setString(7, transaction.recipient().name());
+            ps.setBigDecimal(8, transaction.recipient().oldBalance());
+            ps.setBigDecimal(9, transaction.recipient().newBalance());
+            ps.setBoolean(10, transaction.isFraud());
+            ps.setBoolean(11, transaction.isFlaggedFraud());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao salvar transação", e);
+        }
     }
 
     private Transaction mapResultSetToTransaction(ResultSet rs) {
